@@ -53,4 +53,30 @@ describe Account do
       presence_of_column @account, :email
     end
   end
+
+  describe "#address" do
+    before(:each) do
+      @account = Account.new(required_attributes)
+    end
+    it "should return only address1 if address2 is not specified" do
+      @account.address.should == @account.address1
+    end
+    
+    it "should return comma-separated address1/address if address2 is specified" do
+      @account.address2 = "Apartment 2B"
+      @account.address.should == "#{@account.address1}, #{@account.address2}"
+    end
+  end
+  
+  describe "#formatted_phone" do
+    it "should format phone to xxx-xxx-xxxx display if phone is 10-digits" do
+      @account = Account.new(:phone => "1234567890")
+      @account.formatted_phone.should == "123-456-7890"
+    end
+    
+    it "should format phone to x-xxx-xxx-xxxx display if phone is 11-digits" do
+      @account = Account.new(:phone => "11234567890")
+      @account.formatted_phone.should == "1-123-456-7890"
+    end
+  end
 end
