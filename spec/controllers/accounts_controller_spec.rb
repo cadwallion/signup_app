@@ -1,18 +1,8 @@
 require 'spec_helper'
 
-def required_attributes
-  {
-    :first_name => "Test",
-    :last_name => "Person",
-    :address1 => "123 Test St",
-    :city => "Testing",
-    :state => "IL",
-    :postal => "12345",
-    :email => "foo@bar.com"
-  }
-end
 
 describe AccountsController do
+  include AccountHelper
   describe "GET index" do
     it "should assign @accounts" do
       account = Account.create(required_attributes)
