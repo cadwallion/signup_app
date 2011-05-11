@@ -9,6 +9,8 @@ class Account < ActiveRecord::Base
   
   attr_accessor :phone1, :phone2, :phone3
   
+  before_validation :generate_phone
+  
   STATES = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", 
               "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
               "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
