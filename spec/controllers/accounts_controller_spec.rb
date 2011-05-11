@@ -37,17 +37,36 @@ describe AccountsController do
   end
   
   describe "POST create" do
-    it "should create a new Account object" do
-      post :create, :account => required_attributes
-      response.should redirect_to(account_path(assigns(:account)))
+    context "with valid attributes" do
+      it "should create a new Account object" do
+        post :create, :account => required_attributes
+        response.should redirect_to(account_path(assigns(:account)))
+      end   
     end
+    context "with invalid attributes" do
+      it "should render new template" do
+        post :create, :account => required_attributes.except(:first_name)
+        assigns(:account).should_not be_valid
+        response.should render_template(:action => 'new')
+      end
+    end   
   end
   
   describe "PUT update" do
-    it "should update the Account object" do
-      account = Account.create(required_attributes)
-      put :update, :id => account.id, :account => required_attributes.merge(:first_name => "Untested")
-      Account.find(account.id).should == assigns(:account)
+    context "with valid attributes" do
+      it "should update the Account object" do
+        account = Account.create(required_attributes)
+        put :update, :id => account.id, :account => required_attributes.merge(:first_name => "Untested")
+        Account.find(account.id).should == assigns(:account)
+      end
+    end
+    context "with invalid attributes" do
+      it "should render the edit template" do
+        account = Account.create(required_attributes)
+        put :update, :id => account.id, :account => { :first_name => nil }
+        assigns(:account).should_not be_valid
+        response.should render_template(:action => 'edit')
+      end
     end
   end
   
