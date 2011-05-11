@@ -1,0 +1,40 @@
+<%= form_for @account do |f| %>
+	<div class="field">
+		<%= f.label :first_name, "First Name" %>
+		<%= f.text_field :first_name %>
+	</div>
+	<div class="field">
+		<%= f.label :last_name, "Last Name" %>
+		<%= f.text_field :last_name %>
+	</div>
+	<div class="field">
+		<%= f.label :address1, "Address" %>
+		<%= f.text_field :address1 %>
+		<%= f.text_field :address2 %>
+	</div>
+	<div class="field">
+		<%= f.label :city, "City" %>
+		<%= f.text_field :city %>
+	</div>
+	<div class="field">
+		<%= f.label :state, "State" %>
+		<%= f.select :state, Account::STATES, :prompt => "Select" %>
+	</div>
+	<div class="field">
+		<%= f.label :postal, "Postal" %>
+		<%= f.text_field :postal %>
+	</div>
+	<div class="field">
+		<%= f.label :email, "Email" %>
+		<%= f.text_field :email %>
+	</div>
+	<div class="field">
+		<%= f.label :phone, "Phone" %>
+		<%= f.text_field :phone1, :size => 3 %>
+		<%= f.text_field :phone2, :size => 3 %>
+		<%= f.text_field :phone3, :size => 4 %>
+	</div>
+	<div class="submit">
+		<%= f.submit "Submit", :disable_with => 'Sending...' %>
+	</div>
+<% end %>
