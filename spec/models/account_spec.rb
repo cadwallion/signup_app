@@ -57,18 +57,16 @@ describe Account do
     end
     
     it "should format phone to x-xxx-xxx-xxxx display if phone is 11-digits" do
+      #@account = Account.new(:phone => "11234567890")
       @account = Account.new(:phone => "11234567890")
       @account.formatted_phone.should == "1-123-456-7890"
     end
   end
   
-  describe "#generate_phone" do
-    it "should combine phone1-3" do
-      @account = Account.new
-      @account.phone1 = "123"
-      @account.phone2 = "456"
-      @account.phone3 = "7890"
-      @account.generate_phone
+  describe "#sanitize_phone" do
+    it "should remove formatting characters" do
+      @account = Account.new(:phone => "(123) 456-7890")
+      @account.sanitize_phone
       @account.phone.should == "1234567890"
     end
   end

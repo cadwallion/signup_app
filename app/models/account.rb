@@ -7,9 +7,9 @@ class Account < ActiveRecord::Base
   validates :postal, :presence => true
   validates :email, :presence => true
   
-  attr_accessor :phone1, :phone2, :phone3
+  attr_accessible :first_name, :last_name, :address1, :address2, :city, :state, :postal, :email, :phone 
+  before_validation :sanitize_phone
   
-  before_validation :generate_phone
   
   STATES = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", 
               "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
@@ -33,19 +33,7 @@ class Account < ActiveRecord::Base
     end
   end
   
-  def generate_phone
-    self.phone = self.phone1 + self.phone2 + self.phone3
-  end
-  
-  def phone1=(val)
-    @phone1 = val
-  end
-  
-  def phone2=(val)
-    @phone2 = val
-  end
-  
-  def phone3=(val)
-    @phone3 = val
+  def sanitize_phone
+    self.phone.gsub!(/\D/, '') unless self.phone.nil?
   end
 end
