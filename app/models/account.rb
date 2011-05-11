@@ -30,4 +30,20 @@ class Account < ActiveRecord::Base
       "#{self.phone[0,1]}-#{self.phone[1,3]}-#{self.phone[4,3]}-#{self.phone[7,4]}"
     end
   end
+  
+  def generate_phone
+    self.phone = self.phone1 + self.phone2 + self.phone3
+  end
+  
+  def phone1=(val)
+    @phone1 = val
+  end
+  
+  def phone2=(val)
+    @phone2 = val
+  end
+  
+  def phone3=(val)
+    @phone3 = val
+  end
 end

@@ -61,4 +61,15 @@ describe Account do
       @account.formatted_phone.should == "1-123-456-7890"
     end
   end
+  
+  describe "#generate_phone" do
+    it "should combine phone1-3" do
+      @account = Account.new
+      @account.phone1 = "123"
+      @account.phone2 = "456"
+      @account.phone3 = "7890"
+      @account.generate_phone
+      @account.phone.should == "1234567890"
+    end
+  end
 end
