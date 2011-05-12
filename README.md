@@ -25,8 +25,9 @@ Features
 ----
 
 - Signup App contains basic functionality for CRUD on Signups.  You can access this via /accounts/
+- Account Search.  Use the form to search by first name, last name, or email.
 - Account Verification.  Accounts upon signup default to unverified, backed by a Redis datastore to process
-- Verification Worker.  This can be accessed directly or started as a daemon rake task.
+- Verification Worker.  This can be accessed directly or started as a daemon rake task (Requires UNIX).
 
 VerificationWorker
 ----
