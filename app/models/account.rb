@@ -36,4 +36,12 @@ class Account < ActiveRecord::Base
   def sanitize_phone
     self.phone.gsub!(/\D/, '') unless self.phone.nil?
   end
+  
+  def verify!
+    if self.new_record?
+      return false
+    else
+      self.update_attribute(:verified, true)
+    end
+  end
 end

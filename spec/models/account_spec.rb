@@ -70,4 +70,17 @@ describe Account do
       @account.phone.should == "1234567890"
     end
   end
+  
+  describe "#verify!" do
+    it "sets verified to true" do
+      @account = Account.create(required_attributes)
+      @account.verify!
+      @account.verified.should be_true
+    end
+    
+    it "returns false if attempting to verify an unsaved record" do
+      @account = Account.new
+      @account.verify!.should be_false
+    end
+  end
 end
