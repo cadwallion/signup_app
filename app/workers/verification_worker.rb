@@ -1,8 +1,8 @@
 class VerificationWorker
   attr_reader :queue_key, :connection
-  def initialize
+  def initialize(connection)
     @queue_key = "accounts"
-    @connection = Queue.connection
+    @connection = connection
   end
   
   def start

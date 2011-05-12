@@ -4,12 +4,12 @@ describe VerificationWorker do
   include AccountHelper
   describe "#initialize" do
     it "creates a connection to the Queue connection" do
-      v = VerificationWorker.new
+      v = VerificationWorker.new(Queue.connection)
       v.connection.should == Queue.connection
     end
     
     it "sets the queue_key to accounts" do
-      v = VerificationWorker.new
+      v = VerificationWorker.new(Queue.connection)
       v.queue_key.should == "accounts"
     end
   end
@@ -18,7 +18,7 @@ describe VerificationWorker do
     before(:each) do
       @account = Account.create(required_attributes)
       Queue.add_account(@account.id)
-      @worker = VerificationWorker.new
+      @worker = VerificationWorker.new(Queue.connection)
     end
     
     it "pulls the next account from the queue" do

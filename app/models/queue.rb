@@ -2,8 +2,8 @@ require 'redis'
 
 class Queue
   class << self
-    attr_accessor :connection
-    
+    #attr_accessor :connection
+  
     def connection
       @connection ||= Redis.new
     end
