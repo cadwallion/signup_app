@@ -1,0 +1,12 @@
+<div id="search">	
+<%= form_tag search_accounts_path do %>
+	<label for="search[term]">Search:</label>
+	<select name="search[type]">
+		<option value="first_name">First Name</option>
+		<option value="last_name">Last Name</option>
+		<option value="email">Email</option>
+	</select>
+	<%= text_field_tag "search[term]", (@search.nil? ? "" : @search[:term]) %>
+	<%= submit_tag "Search" %>
+<% end %>
+</div>

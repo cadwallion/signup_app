@@ -30,7 +30,7 @@ describe AccountsController do
     context "with valid attributes" do
       it "should create a new Account object" do
         post :create, :account => required_attributes
-        response.should redirect_to(account_path(assigns(:account)))
+        response.should redirect_to(accounts_path))
       end   
     end
     context "with invalid attributes" do

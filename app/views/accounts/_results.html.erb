@@ -1,0 +1,26 @@
+<table cellpadding="4" cellspacing="0" border="1">
+	<tr>
+		<th>Name</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Postal</th>
+		<th>Phone</th>
+		<th>Email</th>
+		<th>Verified</th>
+		<th>Tools</th>
+	</tr>
+<% @accounts.each do |account| %>
+	<tr>
+		<td><%= account.first_name %> <%= account.last_name %></td>
+		<td><%= account.address %></td>
+		<td><%= account.city %></td>
+		<td><%= account.state %></td>
+		<td><%= account.postal %></td>
+		<td><%= account.formatted_phone %></td>
+		<td><%= account.email %></td>
+		<td><%= account.verified %></td>
+		<td><%= link_to "Edit", edit_account_path(account) %> | <%= link_to "Delete", account, :confirm => "Are you sure?", :method => :delete %></td>
+	</tr>
+<% end %>
+</table>

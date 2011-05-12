@@ -4,4 +4,6 @@ SignupApp::Application.routes.draw do
       post :search
     end
   end
+  
+  root :to => "accounts#new"
 end
