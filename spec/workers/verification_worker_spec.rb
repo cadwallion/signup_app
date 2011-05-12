@@ -20,6 +20,7 @@ describe VerificationWorker do
       Queue.add_account(@account.id)
       @worker = VerificationWorker.new
     end
+    
     it "pulls the next account from the queue" do
       start_count = Queue.pending_verification
       @worker.process_next

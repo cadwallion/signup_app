@@ -1,3 +1,7 @@
 SignupApp::Application.routes.draw do
-  resources :accounts
+  resources :accounts do
+    collection do
+      post :search
+    end
+  end
 end

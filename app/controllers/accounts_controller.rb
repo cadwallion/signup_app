@@ -43,6 +43,11 @@ class AccountsController < ApplicationController
     end
   end
   
+  def search
+    @search = params[:search]
+    @accounts = Account.search(@search)
+  end
+  
   def destroy
     @account = Account.new(params[:id])
     @account.destroy

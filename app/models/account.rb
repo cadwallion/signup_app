@@ -16,6 +16,8 @@ class Account < ActiveRecord::Base
               "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
               "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
               "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+              
+  VALID_SEARCH_COLUMNS = ["first_name", "last_name", "email"]
   
   def address
     if self.address2.nil?
@@ -42,6 +44,14 @@ class Account < ActiveRecord::Base
       return false
     else
       self.update_attribute(:verified, true)
+    end
+  end
+  
+  def self.search(params)
+    if params[:type].blank? || !VALID_SEARCH_COLUMNS.include?(params[:type])
+      return []
+    else
+      return self.where(["#{params[:type]} = ?", params[:term]])
     end
   end
 end

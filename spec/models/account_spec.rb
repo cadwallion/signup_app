@@ -83,4 +83,21 @@ describe Account do
       @account.verify!.should be_false
     end
   end
+  
+  describe "#search" do
+    before(:each) do
+      Account.create!(required_attributes)
+      Account.create!(required_attributes.merge(:first_name => "Jon"))
+    end
+    
+    it "returns no rows if the search type is not valid" do
+      accounts = Account.search(:type => "foo", :term => "Jon")
+      accounts.should be_empty
+    end
+    
+    it "returns rows based on valid search type" do
+      accounts = Account.search(:type => "first_name", :term => "Jon")
+      accounts.size.should == 1
+    end
+  end
 end

@@ -68,4 +68,12 @@ describe AccountsController do
       response.should redirect_to(accounts_path)
     end
   end
+  
+  describe "POST search" do
+    it "should assign an array of Accounts" do
+      Account.create!(required_attributes)
+      post :search, :search => { :type => "first_name", :term => "Test" }
+      assigns(:accounts).size.should == 1
+    end
+  end
 end
