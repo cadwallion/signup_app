@@ -16,7 +16,7 @@ describe Queue do
   describe "#add_account" do
     it "push id to the account list" do
       a = Account.create(required_attributes)
-      count = Queue.waiting(:accounts)
+      count = Queue.pending_verification
       Queue.add_account(a.id).should > 0
     end
   end
@@ -25,11 +25,11 @@ describe Queue do
     it "returns the count of the queue type" do
       a = Account.create(required_attributes)
       Queue.add_account(a.id)
-      Queue.waiting(:accounts).should == 1
+      Queue.pending_verification.should == 1
     end
     
     it "returns 0 for a non-existent queue" do
-      Queue.waiting(:nothing).should == 0
+      Queue.pending_verification.should == 0
     end
   end
 end

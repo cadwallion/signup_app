@@ -12,8 +12,8 @@ class Queue
       @connection.rpush("accounts", id)
     end
     
-    def waiting(key_type)
-      @connection.llen(key_type.to_s)
+    def pending_verification
+      @connection.llen("accounts")
     end
   end
 end

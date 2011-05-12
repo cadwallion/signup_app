@@ -21,9 +21,9 @@ describe VerificationWorker do
       @worker = VerificationWorker.new
     end
     it "pulls the next account from the queue" do
-      start_count = Queue.waiting("accounts")
+      start_count = Queue.pending_verification
       @worker.process_next
-      Queue.waiting("accounts").should == start_count - 1
+      Queue.pending_verification.should == start_count - 1
     end
     
     it "runs verify! on the account it pulls" do
